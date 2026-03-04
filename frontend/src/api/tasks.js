@@ -27,3 +27,17 @@ export const createTask = async (task) => {
     })
     return res.json()
 }
+
+export const toggleTask = async (id, completed) => {
+
+    await fetch(`${API}/api/tasks/${id}/`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            completed: !completed
+        })
+    })
+}

@@ -12,12 +12,15 @@ from .serializers import RegisterSerializer
 
 # 🔐 REGISTER API
 class RegisterView(generics.CreateAPIView):
+    authentication_classes = []   # ← disable JWT check
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-    permission_classes = [AllowAny]
+
 
 
 class LoginView(APIView):
+    authentication_classes = [] 
     permission_classes = [AllowAny]
 
     def post(self, request):
@@ -43,8 +46,8 @@ class LoginView(APIView):
             key="access_token",
             value=access_token,
             httponly=True,
-            samesite="None",
-            secure=True,
+            samesite="Lax",
+            secure=False,
             path="/"
         )
 
@@ -52,8 +55,8 @@ class LoginView(APIView):
             key="refresh_token",
             value=refresh_token,
             httponly=True,
-            samesite="None",
-            secure=True,
+            samesite="Lax",
+            secure=False,
             path="/"
         )
 

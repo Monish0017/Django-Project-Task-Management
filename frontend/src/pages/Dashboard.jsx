@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTasks, createTask } from "../api/tasks"
+import { getTasks, createTask, toggleTask } from "../api/tasks"
 import TaskCard from "../components/TaskCard"
 import Navbar from "../components/Navbar"
 import CreateTask from "../components/CreateTask"
@@ -9,9 +9,7 @@ function Dashboard({ setAuth }) {
     const [tasks, setTasks] = useState([])
 
     const loadTasks = async () => {
-        console.log("Loading tasks...")
         const data = await getTasks()
-        console.log("Tasks received:", data)
         setTasks(data)
     }
 
@@ -20,30 +18,40 @@ function Dashboard({ setAuth }) {
     }, [])
 
     const handleCreate = async (taskData) => {
-
         await createTask(taskData)
+        loadTasks()
+    }
 
-        // reload tasks after creating
+    const handleToggle = async (task) => {
+        await toggleTask(task.id, task.completed)
         loadTasks()
     }
 
     return (
-        <div>
+        <div className="min-h-screen bg-gray-100">
 
             <Navbar setAuth={setAuth} />
 
-            <div className="p-6">
+            <div className="max-w-3xl mx-auto p-6">
 
-                {/* Create Task UI */}
                 <CreateTask onCreate={handleCreate} />
 
-                {/* Task List */}
-                <div className="grid gap-4">
+                <h2 className="text-xl font-semibold mb-4">
+                    Your Tasks
+                </h2>
 
-                    {tasks.map(task => (
-                        <TaskCard key={task.id} task={task} />
-                    ))}
+                <div className="space-y-4">
+                    {tasks.length === 0 && (
+                        <p className="text-gray-500">No tasks yet</p>
+                    )}
 
+                                {tasks.map(task => (
+                <TaskCard
+                    key={task.id}
+                    task={task}
+                    onToggle={handleToggle}
+                />
+            ))}
                 </div>
 
             </div>
