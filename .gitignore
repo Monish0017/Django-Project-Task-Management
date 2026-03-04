@@ -1,0 +1,4 @@
+frontend/
+Django-env/
+db.sqlite3
+tasks/

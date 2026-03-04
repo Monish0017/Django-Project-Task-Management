@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Welcome {{ request.user.username }}</h2>
+<a href="/auth/logout-page/">Logout</a>
+
+<hr>
+
+<h3>Create New Task</h3>
+
+<form method="POST">
+    {% csrf_token %}
+    <input name="title" placeholder="Task title" required><br><br>
+
+    <textarea name="description" placeholder="Description"></textarea><br><br>
+
+    <label>Priority:</label>
+    <select name="priority">
+        <option value="LOW">Low</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HIGH">High</option>
+    </select><br><br>
+
+    <label>Due Date:</label>
+    <input type="datetime-local" name="due_date"><br><br>
+
+    <label>
+        <input type="checkbox" name="completed">
+        Mark as completed
+    </label><br><br>
+
+    <button type="submit">Add Task</button>
+</form>
+
+<hr>
+
+<h3>Your Tasks</h3>
+
+{% for task in tasks %}
+    <div class="task">
+        <b>{{ task.title }}</b> ({{ task.priority }}) <br>
+        {{ task.description }} <br>
+        Due: {{ task.due_date }} <br>
+
+        Status:
+        {% if task.completed %}
+            ✅ Completed
+        {% else %}
+            ❌ Pending
+        {% endif %}
+
+        <br><br>
+
+        <a href="?toggle={{ task.id }}">🔁 Toggle</a> |
+        <a href="?delete={{ task.id }}">🗑 Delete</a>
+
+        <hr>
+    </div>
+{% empty %}
+    <p>No tasks yet</p>
+{% endfor %}
+
+{% endblock %}
