@@ -28,52 +28,58 @@ function Register({ setPage }) {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen">
+        <div className="min-h-screen bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 flex items-center justify-center">
 
             <form
                 onSubmit={handleSubmit}
-                className="border p-6 rounded w-80 space-y-4"
+                className="bg-white shadow-xl rounded-xl p-8 w-96 space-y-4"
             >
 
-                <h2 className="text-xl font-bold">Register</h2>
+                <h2 className="text-2xl font-bold text-center text-gray-700">
+                    Register
+                </h2>
 
                 <input
-                    className="border p-2 w-full"
+                    className="border p-3 w-full rounded focus:ring-2 focus:ring-blue-400"
                     placeholder="Username"
+                    value={username}
                     onChange={(e)=>setUsername(e.target.value)}
                 />
 
                 <input
-                    className="border p-2 w-full"
+                    className="border p-3 w-full rounded focus:ring-2 focus:ring-blue-400"
                     placeholder="Email"
+                    value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                 />
 
                 <input
                     type="password"
-                    className="border p-2 w-full"
+                    className="border p-3 w-full rounded focus:ring-2 focus:ring-blue-400"
                     placeholder="Password"
+                    value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                 />
 
                 <input
                     type="password"
-                    className="border p-2 w-full"
+                    className="border p-3 w-full rounded focus:ring-2 focus:ring-blue-400"
                     placeholder="Confirm Password"
+                    value={confirmPassword}
                     onChange={(e)=>setConfirmPassword(e.target.value)}
                 />
 
                 <button
-                    className="bg-green-600 text-white w-full py-2"
+                    className="bg-blue-600 hover:bg-blue-700 transition text-white w-full py-2 rounded-lg"
                 >
                     Register
                 </button>
 
-                <p className="text-sm text-center">
-                    Already have account?
+                <p className="text-sm text-center text-gray-500">
+                    Already have an account?
                     <button
                         type="button"
-                        className="text-blue-500 ml-1"
+                        className="text-blue-600 ml-1 font-semibold"
                         onClick={()=>setPage("login")}
                     >
                         Login

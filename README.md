@@ -9,7 +9,6 @@ pip freeze > requirements.txt
 
 requirements.txt will have all the modules used for this project.
 
-
 django-admin startproject config .
 
 Project created with the title "config".
@@ -27,7 +26,7 @@ Inside settings.py I added the CORS origin, cookies, etc. Additional settings we
 
 python manage.py runserver
 
-=
+
 
 # UI - React Vite
 

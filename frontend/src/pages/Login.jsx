@@ -13,53 +13,52 @@ function Login({ setAuth, setPage }) {
 
         setAuth(true)
     }
-    
-    return (
-        <div className="min-h-screen bg-gray-100">
 
-            {/* Navbar */}
-            <div className="bg-blue-600 text-white p-4 flex justify-between">
-                <h1 className="font-bold">Task Manager</h1>
+    return (
+        <div className="min-h-screen bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 flex items-center justify-center">
+
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white shadow-xl rounded-xl p-8 w-96 space-y-4"
+            >
+
+                <h2 className="text-2xl font-bold text-center text-gray-700">
+                    Login
+                </h2>
+
+                <input
+                    className="border p-3 w-full rounded focus:ring-2 focus:ring-blue-400"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e)=>setUsername(e.target.value)}
+                />
+
+                <input
+                    type="password"
+                    className="border p-3 w-full rounded focus:ring-2 focus:ring-blue-400"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                />
 
                 <button
-                    onClick={() => setPage("register")}
-                    className="bg-white text-blue-600 px-3 py-1 rounded"
+                    className="bg-blue-600 hover:bg-blue-700 transition text-white w-full py-2 rounded-lg"
                 >
-                    Register
+                    Login
                 </button>
-            </div>
 
-            <div className="flex items-center justify-center h-screen">
-
-                <form
-                    onSubmit={handleSubmit}
-                    className="border p-6 rounded w-80 space-y-4 bg-white"
-                >
-
-                    <h2 className="text-xl font-bold">Login</h2>
-
-                    <input
-                        className="border p-2 w-full"
-                        placeholder="Username"
-                        onChange={(e)=>setUsername(e.target.value)}
-                    />
-
-                    <input
-                        type="password"
-                        className="border p-2 w-full"
-                        placeholder="Password"
-                        onChange={(e)=>setPassword(e.target.value)}
-                    />
-
+                <p className="text-sm text-center text-gray-500">
+                    Don't have an account?
                     <button
-                        className="bg-blue-600 text-white w-full py-2"
+                        type="button"
+                        className="text-blue-600 ml-1 font-semibold"
+                        onClick={()=>setPage("register")}
                     >
-                        Login
+                        Register
                     </button>
+                </p>
 
-                </form>
-
-            </div>
+            </form>
 
         </div>
     )

@@ -41,3 +41,12 @@ export const toggleTask = async (id, completed) => {
         })
     })
 }
+
+
+export const deleteTask = async (id) => {
+
+    await fetch(`${API}/api/tasks/${id}/`, {
+        method: "DELETE",
+        credentials: "include"
+    })
+}
